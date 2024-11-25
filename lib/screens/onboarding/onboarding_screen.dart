@@ -13,14 +13,21 @@ class OnboardingScreen extends StatelessWidget {
         color: Color(0xFF002F63), fontSize: 18, fontWeight: FontWeight.w400);
     return Scaffold(
       body: OnBoardingSlider(
+          skipIcon: Icon(
+            Icons.chevron_right,
+            size: 30,
+            color: Colors.white,
+          ),
+          controllerColor: Color(0xFF2C6ABD),
+          addController: true,
           totalPage: 3,
           headerBackgroundColor: Colors.transparent,
           background: [Container(), Container(), Container()],
           speed: 1,
           skipTextButton: Text("Skip"),
           onFinish: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => RoleScreen()));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => RoleScreen()));
           },
           finishButtonStyle:
               FinishButtonStyle(backgroundColor: Color(0xFF2C6ABD)),

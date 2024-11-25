@@ -1,3 +1,4 @@
+import 'package:exler/screens/REVIEWEE_SCREENS/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class RoleScreen extends StatelessWidget {
@@ -42,7 +43,7 @@ class RoleScreen extends StatelessWidget {
                     style: TextStyle(color: Color(0xFF6C7278), fontSize: 22),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 50,
                   ),
                   Container(
                     decoration: BoxDecoration(boxShadow: [
@@ -88,7 +89,10 @@ class RoleScreen extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             )),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => LoginScreen()));
+                        },
                         child: Column(
                           children: [
                             Image.asset(
