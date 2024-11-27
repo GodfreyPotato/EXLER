@@ -24,7 +24,10 @@ class OnboardingScreen extends StatelessWidget {
           headerBackgroundColor: Colors.transparent,
           background: [Container(), Container(), Container()],
           speed: 1,
-          skipTextButton: Text("Skip"),
+          skipTextButton: Text(
+            "Skip",
+            style: TextStyle(color: Color(0xFF2C6ABD), fontSize: 22),
+          ),
           onFinish: () {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => RoleScreen()));

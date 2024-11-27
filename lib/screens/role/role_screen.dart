@@ -1,4 +1,4 @@
-import 'package:exler/screens/REVIEWEE_SCREENS/login/login_screen.dart';
+import 'package:exler/screens/REVIEWEE_SCREENS/login/login/login_signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class RoleScreen extends StatelessWidget {
