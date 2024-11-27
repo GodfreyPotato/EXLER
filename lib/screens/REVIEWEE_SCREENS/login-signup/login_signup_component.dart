@@ -1,5 +1,7 @@
 import 'package:exler/data/OPTIONS.dart';
+import 'package:exler/screens/REVIEWEE_SCREENS/login-signup/login_next_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class signup_component extends StatefulWidget {
   signup_component({
@@ -16,6 +18,16 @@ class signup_component extends StatefulWidget {
 }
 
 class _signup_componentState extends State<signup_component> {
+  var firstNameCtrl = TextEditingController();
+  var middleNameCtrl = TextEditingController();
+  var lastNameCtrl = TextEditingController();
+  var bdateCtrl = TextEditingController();
+  var nationalityCtrl;
+  var genderCtrl;
+  var addressCtrl = TextEditingController();
+  var zipcodeCtrl = TextEditingController();
+  var emailCtrl = TextEditingController();
+  var passwordCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,37 +44,41 @@ class _signup_componentState extends State<signup_component> {
               "First Name",
               style: widget.textStyle,
             ),
-            TextField(
+            TextFormField(
+              controller: firstNameCtrl,
               decoration: widget.inputDecoration,
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             Text(
               "Middle Name",
               style: widget.textStyle,
             ),
-            TextField(
+            TextFormField(
+              controller: middleNameCtrl,
               decoration: widget.inputDecoration,
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             Text(
               "Last Name",
               style: widget.textStyle,
             ),
-            TextField(
+            TextFormField(
+              controller: lastNameCtrl,
               decoration: widget.inputDecoration,
             ),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             Text(
               "Date of birth",
               style: widget.textStyle,
             ),
-            TextField(
+            TextFormField(
+              controller: bdateCtrl,
               readOnly: true,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(8),
@@ -70,16 +86,23 @@ class _signup_componentState extends State<signup_component> {
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   suffixIcon: IconButton(
                       onPressed: () async {
-                        await showDatePicker(
+                        DateTime? selectedDate = await showDatePicker(
                             context: context,
-                            firstDate: DateTime(1920),
+                            firstDate: DateTime(1915),
                             lastDate: DateTime.now());
+
+                        if (selectedDate != null) {
+                          String dateformatted =
+                              DateFormat.yMMMd().format(selectedDate);
+                          bdateCtrl =
+                              TextEditingController(text: dateformatted);
+                        }
                         setState(() {});
                       },
                       icon: const Icon(Icons.calendar_month))),
             ),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             Row(
               children: [
@@ -90,6 +113,9 @@ class _signup_componentState extends State<signup_component> {
                     children: [
                       const Text("Nationality"),
                       DropdownMenu(
+                          onSelected: (value) {
+                            nationalityCtrl = value;
+                          },
                           menuHeight: 200,
                           dropdownMenuEntries: NATIONALITIESENTRIES)
                     ],
@@ -105,14 +131,18 @@ class _signup_componentState extends State<signup_component> {
                     children: [
                       const Text("Gender"),
                       DropdownMenu(
-                          menuHeight: 200, dropdownMenuEntries: GENDERENTRIES)
+                          onSelected: (value) {
+                            genderCtrl = value;
+                          },
+                          menuHeight: 200,
+                          dropdownMenuEntries: GENDERENTRIES)
                     ],
                   ),
                 ),
               ],
             ),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             Row(
               children: [
@@ -125,7 +155,8 @@ class _signup_componentState extends State<signup_component> {
                         "Address",
                         style: widget.textStyle,
                       ),
-                      TextField(
+                      TextFormField(
+                        controller: addressCtrl,
                         decoration: widget.inputDecoration,
                       )
                     ],
@@ -143,7 +174,8 @@ class _signup_componentState extends State<signup_component> {
                         "ZIP Code",
                         style: widget.textStyle,
                       ),
-                      TextField(
+                      TextFormField(
+                        controller: zipcodeCtrl,
                         decoration: widget.inputDecoration,
                       )
                     ],
@@ -160,13 +192,43 @@ class _signup_componentState extends State<signup_component> {
                     minimumSize: Size(250, 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5))),
-                onPressed: () {},
+                onPressed: () {
+                  Map signup = {
+                    'firstName': firstNameCtrl.text,
+                    'middleName': middleNameCtrl.text,
+                    'lastName': lastNameCtrl.text,
+                    'bdate': bdateCtrl.text,
+                    'nationality': nationalityCtrl,
+                    'gender': genderCtrl,
+                    'address': addressCtrl.text,
+                    'zipcode': zipcodeCtrl.text,
+                  };
+
+                  signup.forEach((k, v) {
+                    if (v == null) {
+                      print("this is null $k");
+                    }
+                  });
+
+                  if (signup.containsValue(null)) {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Some fields are missing.")));
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => LoginNextScreen(
+                              inputDecoration: widget.inputDecoration,
+                              textStyle: widget.textStyle,
+                              firstForm: signup,
+                            )));
+                  }
+                },
                 child: const Text(
                   "Next",
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 )),
             SizedBox(
-              height: 20,
+              height: 50,
             ),
           ],
         ),
@@ -179,7 +241,8 @@ class _signup_componentState extends State<signup_component> {
               "Email",
               style: widget.textStyle,
             ),
-            TextField(
+            TextFormField(
+              controller: emailCtrl,
               decoration: widget.inputDecoration,
             ),
             SizedBox(
@@ -189,8 +252,12 @@ class _signup_componentState extends State<signup_component> {
               "Password",
               style: widget.textStyle,
             ),
-            TextField(
-              decoration: widget.inputDecoration,
+            TextFormField(
+              controller: passwordCtrl,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                      onPressed: () {}, icon: Icon(Icons.visibility))),
             ),
             SizedBox(
               height: 10,

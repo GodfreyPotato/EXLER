@@ -204,3 +204,8 @@ List<DropdownMenuEntry> GENDERENTRIES = [
   DropdownMenuEntry(value: "Male", label: "Male"),
   DropdownMenuEntry(value: "Female", label: "Female")
 ];
+
+List<DropdownMenuEntry> EDUCATION = [
+  DropdownMenuEntry(value: "High School", label: "High School"),
+  DropdownMenuEntry(value: "College", label: "College")
+];

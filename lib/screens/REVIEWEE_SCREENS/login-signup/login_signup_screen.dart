@@ -1,4 +1,4 @@
-import 'package:exler/screens/REVIEWEE_SCREENS/login/login_signup_component.dart';
+import 'package:exler/screens/REVIEWEE_SCREENS/login-signup/login_signup_component.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 70,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 5,
                     ),
                     const Text(
                       "Get Started Now",
