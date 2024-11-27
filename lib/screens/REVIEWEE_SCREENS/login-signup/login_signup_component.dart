@@ -1,5 +1,6 @@
 import 'package:exler/data/OPTIONS.dart';
-import 'package:exler/screens/REVIEWEE_SCREENS/login-signup/login_next_screen.dart';
+import 'package:exler/screens/REVIEWEE_SCREENS/login-signup/login/login_loading_screen.dart';
+import 'package:exler/screens/REVIEWEE_SCREENS/login-signup/signup/signup_form2_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -193,7 +194,7 @@ class _signup_componentState extends State<signup_component> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5))),
                 onPressed: () {
-                  Map signup = {
+                  Map<String, dynamic> signup = {
                     'firstName': firstNameCtrl.text,
                     'middleName': middleNameCtrl.text,
                     'lastName': lastNameCtrl.text,
@@ -255,6 +256,7 @@ class _signup_componentState extends State<signup_component> {
             TextFormField(
               controller: passwordCtrl,
               decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(8),
                   border: OutlineInputBorder(),
                   suffixIcon: IconButton(
                       onPressed: () {}, icon: Icon(Icons.visibility))),
@@ -288,7 +290,15 @@ class _signup_componentState extends State<signup_component> {
                     minimumSize: Size(250, 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5))),
-                onPressed: () {},
+                onPressed: () {
+                  Map<String, dynamic> loginCredentials = {
+                    'email': emailCtrl.text,
+                    'password': passwordCtrl.text
+                  };
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (_) =>
+                          LoginLoadingScreen(form: loginCredentials)));
+                },
                 child: const Text(
                   "Log In",
                   style: TextStyle(color: Colors.white, fontSize: 18),

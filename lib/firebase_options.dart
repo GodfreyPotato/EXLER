@@ -23,7 +23,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -47,28 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDG2NeAb2qK1La4vCgNhQ1YqGsf8TYVXU8',
-    appId: '1:661721676612:web:17831c8a2a0a08f87eb511',
-    messagingSenderId: '661721676612',
-    projectId: 'adet-exler',
-    authDomain: 'adet-exler.firebaseapp.com',
-    storageBucket: 'adet-exler.firebasestorage.app',
+    apiKey: 'AIzaSyDao-Iv4TddnU6HNDb4T9TDgVGHEuxX4ao',
+    appId: '1:591474664808:web:ff8df19e134959191f22dd',
+    messagingSenderId: '591474664808',
+    projectId: 'exler-a1d32',
+    authDomain: 'exler-a1d32.firebaseapp.com',
+    storageBucket: 'exler-a1d32.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDiEU4qsNnWFD40Izc-i-7ABPaP7C-SLNQ',
-    appId: '1:661721676612:android:4028619439104f387eb511',
-    messagingSenderId: '661721676612',
-    projectId: 'adet-exler',
-    storageBucket: 'adet-exler.firebasestorage.app',
+    apiKey: 'AIzaSyB-xPaD9hodR3LmfEeKPYfktS_DuQykN44',
+    appId: '1:591474664808:android:e03e385e60ee7d551f22dd',
+    messagingSenderId: '591474664808',
+    projectId: 'exler-a1d32',
+    storageBucket: 'exler-a1d32.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAc-aXCkLHu4L0YkSTOLt-TzflP8MWNbs0',
-    appId: '1:661721676612:ios:d4fabf9a58df4ad37eb511',
-    messagingSenderId: '661721676612',
-    projectId: 'adet-exler',
-    storageBucket: 'adet-exler.firebasestorage.app',
-    iosBundleId: 'com.example.exler',
-  );
 }

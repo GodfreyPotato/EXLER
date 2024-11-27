@@ -1,6 +1,6 @@
 import 'package:exler/data/OPTIONS.dart';
 import 'package:exler/screens/REVIEWEE_SCREENS/home/home_screen.dart';
-import 'package:exler/screens/REVIEWEE_SCREENS/login-signup/signingup_screen.dart';
+import 'package:exler/screens/REVIEWEE_SCREENS/login-signup/signup/signup_loading_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginNextScreen extends StatefulWidget {
@@ -11,7 +11,7 @@ class LoginNextScreen extends StatefulWidget {
       required this.firstForm});
   final TextStyle textStyle;
   final InputDecoration inputDecoration;
-  final Map firstForm;
+  final Map<String, dynamic> firstForm;
   @override
   State<LoginNextScreen> createState() => _LoginNextScreenState();
 }
@@ -81,6 +81,7 @@ class _LoginNextScreenState extends State<LoginNextScreen> {
             TextFormField(
               controller: passwordCtrl,
               decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(8),
                   border: OutlineInputBorder(),
                   suffixIcon: IconButton(
                       onPressed: () {}, icon: Icon(Icons.visibility))),
@@ -95,6 +96,7 @@ class _LoginNextScreenState extends State<LoginNextScreen> {
             TextFormField(
               controller: cpasswordCtrl,
               decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(8),
                   border: OutlineInputBorder(),
                   suffixIcon: IconButton(
                       onPressed: () {}, icon: Icon(Icons.visibility))),
@@ -194,7 +196,7 @@ class _LoginNextScreenState extends State<LoginNextScreen> {
                   }
 
                   print(pass);
-                  Map signupform2 = {
+                  Map<String, dynamic> signupform2 = {
                     'username': usernameCtrl.text,
                     'email': emailCtrl.text,
                     'password': pass,
@@ -217,7 +219,7 @@ class _LoginNextScreenState extends State<LoginNextScreen> {
                         SnackBar(content: Text("Some fields are missing.")));
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => SigningupScreen(
+                        builder: (_) => SignupLoadingScreen(
                               form: signupform2,
                             )));
                   }
